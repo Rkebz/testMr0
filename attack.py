@@ -10,6 +10,13 @@ async def send_request(session, url):
         headers = generate_headers()
         async with session.post(url, data=data, headers=headers) as response:
             print("Request sent:", response.status)
+            if response.status == 301:
+                # التعامل مع إعادة التوجيه 301
+                new_url = response.headers.get('Location')
+                if new_url:
+                    print("Redirecting to:", new_url)
+                    async with session.post(new_url, data=data, headers=headers) as new_response:
+                        print("Redirected request sent:", new_response.status)
             await asyncio.sleep(0.1)  # توزيع الطلبات بين الاستجابات
     except Exception as e:
         print("Error:", e)
