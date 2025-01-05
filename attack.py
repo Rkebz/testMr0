@@ -8,7 +8,7 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 # عرض الاسم بتنسيق ASCII art
-ascii_banner = pyfiglet.figlet_format("Lulzsec Black DDOS")
+ascii_banner = pyfiglet.figlet_format("Lol Dos")
 print(Fore.RED + ascii_banner)
 
 async def send_request(session, url):
